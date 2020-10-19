@@ -12,7 +12,6 @@ import { CategoryApi } from '../../api/category.api';
 export class CategoryFormComponent implements OnInit {
   category: Category;
   form: FormGroup
-  submitted = false;
 
   constructor(private categoryApi: CategoryApi, private fb: FormBuilder) { }
 
@@ -26,7 +25,6 @@ export class CategoryFormComponent implements OnInit {
   }
 
   newCategory(): void {
-    this.submitted = false;
     this.category;
   }
 
