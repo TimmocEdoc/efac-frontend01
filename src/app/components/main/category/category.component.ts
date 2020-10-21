@@ -4,6 +4,7 @@ import { ServicesService } from 'src/app/services.service';
 import { Category } from 'src/types/model';
 import { CategoryApi } from '../api/category.api';
 import { tap } from 'rxjs/operators'
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -12,8 +13,10 @@ import { tap } from 'rxjs/operators'
 })
 export class CategoryComponent implements OnInit {
   categories: Category[]
+  category: Category
   
-  constructor(private categoryApi: CategoryApi) {   }
+  constructor(private categoryApi: CategoryApi, private route: ActivatedRoute,
+    private router: Router) {   }
 
   ngOnInit(): void {
     this.fetch()
@@ -23,5 +26,17 @@ export class CategoryComponent implements OnInit {
     this.categoryApi.getCategories().subscribe(categories => {
       this.categories = categories
     })
+  }
+
+  delete(id): void {
+    this.categoryApi.deleteCategory(id)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/list']);
+        },
+        error => {
+          console.log(error);
+        });
   }
 }
