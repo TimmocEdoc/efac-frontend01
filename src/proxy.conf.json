@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+      "target": "https://efac-server01.herokuapp.com/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+  }

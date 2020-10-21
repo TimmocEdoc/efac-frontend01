@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod",
+    "preinstall": "npx npm-force-resolutions"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@angular/platform-browser": "~10.1.6",
     "@angular/platform-browser-dynamic": "~10.1.6",
     "@angular/router": "~10.1.6",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",
@@ -53,5 +55,8 @@
   "engines": {
     "node": "v12.18.0",
     "npm": "6.14.4"
+  },
+  "resolutions": {
+    "yargs-parser": "^13.1.2"
   }
 }
