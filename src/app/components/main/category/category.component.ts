@@ -22,6 +22,10 @@ export class CategoryComponent implements OnInit {
     this.fetch()
   }
 
+  refreshList(): void {
+    this.fetch();
+  }
+
   fetch() {
     this.categoryApi.getCategories().subscribe(categories => {
       this.categories = categories
@@ -33,7 +37,7 @@ export class CategoryComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.router.navigate(['/list']);
+          this.refreshList();
         },
         error => {
           console.log(error);

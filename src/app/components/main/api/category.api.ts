@@ -26,6 +26,6 @@ export class CategoryApi {
     }
 
     deleteCategory(id): Observable<any> {
-        return this.httpClient.delete(`${this.hostUrl + "category/delete"}/${id}`)
+        return this.httpClient.delete(`${this.hostUrl + "category/delete"}/${id}`, {responseType: 'text'})
     }
 }
