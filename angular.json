@@ -5,10 +5,7 @@
   "projects": {
     "cafe": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-        "styleext": "scss"
-      }},
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -28,7 +25,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/sweetalert2/src/sweetalert2.scss"
+              "../node_modules/sweetalert2/src/sweetalert2.scss"
             ],
             "scripts": []
           },
