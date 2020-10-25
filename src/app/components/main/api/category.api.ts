@@ -22,10 +22,18 @@ export class CategoryApi {
     }
 
     saveCategory(data): Observable<any> {
-        return this.httpClient.post(this.hostUrl + "category/create", data)
+        return this.httpClient.post(this.hostUrl + "category/create", data, {responseType: 'text'})
     }
 
     deleteCategory(id): Observable<any> {
         return this.httpClient.delete(`${this.hostUrl + "category/delete"}/${id}`, {responseType: 'text'})
+    }
+
+    updateCategory(id, data): Observable<any> {
+        return this.httpClient.put(`${this.hostUrl + "category/update"}/${id}`, data, {responseType: 'text'});
+    }
+
+    getCategory(id): Observable<Category> {
+        return this.httpClient.get<Category>(`${this.hostUrl + "category/details"}/${id}`)
     }
 }

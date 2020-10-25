@@ -5,6 +5,7 @@ import { Category } from 'src/types/model';
 import { CategoryApi } from '../api/category.api';
 import { tap } from 'rxjs/operators'
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-category',
@@ -26,6 +27,16 @@ export class CategoryComponent implements OnInit {
     this.fetch();
   }
 
+  successDeleteNotification(){
+    Swal.fire({
+      icon: "success",
+      title: "Category has been deleted.",
+      showConfirmButton: false,
+      timer: 1000,
+      position: "bottom-right"
+    })
+  }
+
   fetch() {
     this.categoryApi.getCategories().subscribe(categories => {
       this.categories = categories
@@ -38,6 +49,7 @@ export class CategoryComponent implements OnInit {
         response => {
           console.log(response);
           this.refreshList();
+          this.successDeleteNotification();
         },
         error => {
           console.log(error);
