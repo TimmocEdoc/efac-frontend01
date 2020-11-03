@@ -1,33 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { iif, Subscription } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
-import { Category } from 'src/types/model';
+import { Table } from 'src/types/model';
 import Swal from 'sweetalert2';
-import { CategoryApi } from '../../api/category.api';
+import { TableApi } from '../../api/table.api';
 
 @Component({
-  selector: 'app-category-form',
-  templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.css']
+  selector: 'app-table-form',
+  templateUrl: './table-form.component.html',
+  styleUrls: ['./table-form.component.css']
 })
-export class CategoryFormComponent implements OnInit {
-  category: Category;
+export class TableFormComponent implements OnInit {
+  table: Table;
   form: FormGroup;
   private routeSub: String;
 
-  constructor(private categoryApi: CategoryApi, private fb: FormBuilder, private route: ActivatedRoute) { }
+  constructor(private tableApi: TableApi, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]]
     })
     this.routeSub = this.route.snapshot.params.id;
-    this.categoryApi.getCategory(this.routeSub).subscribe(category => {
-      if (category) {
-        this.form.patchValue(category)
-        this.category = category;
+    this.tableApi.getTable(this.routeSub).subscribe(table => {
+      if (table) {
+        this.form.patchValue(table)
+        this.table = table;
       }
     })
   }
@@ -36,8 +35,8 @@ export class CategoryFormComponent implements OnInit {
     this.routeSub = null;
   }
 
-  newCategory(): void {
-    this.category;
+  newTable(): void {
+    this.table;
   }
 
   successNotification(){
@@ -55,27 +54,30 @@ export class CategoryFormComponent implements OnInit {
       return alert("failed");
     }
     let body = this.form.value;
-    console.log(this.category);
+    console.log(this.table);
     console.log(body)
-    if(this.category) {
-      body = Object.assign({}, body, { id: this.category.id})
-      this.categoryApi.updateCategory(this.category.id, body).pipe(tap(() => {
+    if(this.table) {
+      body = Object.assign({}, body, { id: this.table.id})
+      this.tableApi.updateTable(this.table.id, body).pipe(tap(() => {
       })).subscribe((response) => {
         console.log(response);
         this.successNotification();
+        this.router.navigate(['/table']);
       }, (error) => {
         console.log(error)
       })
     } else {
-      this.categoryApi.saveCategory(body)
+      this.tableApi.saveTable(body)
       .subscribe(
         response => {
           console.log(response);
           this.successNotification();
+          this.router.navigate(['/table']);
         },
         error => {
           console.log(error);
         });
     }
   }
+
 }

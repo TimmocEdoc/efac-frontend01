@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { CategoryComponent } from './category/category.component';
 import { MainComponent } from './main.component';
+import { TableFormComponent } from './table/table-form/table-form.component';
+import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
     {
@@ -20,6 +22,22 @@ const routes: Routes = [
         {
           path: 'category-form/:id',
           component: CategoryFormComponent
+        },
+        {
+          path: 'category-form',
+          component: CategoryFormComponent
+        },
+        {
+          path: 'table',
+          component: TableComponent
+        },
+        {
+          path: 'table-form/:id',
+          component: TableFormComponent
+        },
+        {
+          path: 'table-form',
+          component: TableFormComponent
         }
       ]
     },
