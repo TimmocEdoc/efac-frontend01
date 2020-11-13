@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { iif, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Category } from 'src/types/model';
+import { Category, CategoryDto } from 'src/types/model';
 import Swal from 'sweetalert2';
 import { CategoryApi } from '../../api/category.api';
 
@@ -13,21 +13,22 @@ import { CategoryApi } from '../../api/category.api';
   styleUrls: ['./category-form.component.css']
 })
 export class CategoryFormComponent implements OnInit {
+  categoryDto: CategoryDto;
   category: Category;
   form: FormGroup;
   private routeSub: String;
 
-  constructor(private categoryApi: CategoryApi, private fb: FormBuilder, private route: ActivatedRoute) { }
+  constructor(private categoryApi: CategoryApi, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]]
     })
     this.routeSub = this.route.snapshot.params.id;
-    this.categoryApi.getCategory(this.routeSub).subscribe(category => {
-      if (category) {
-        this.form.patchValue(category)
-        this.category = category;
+    this.categoryApi.getCategory(this.routeSub).subscribe(categoryDto => {
+      if (categoryDto.category) {
+        this.form.patchValue(categoryDto.category);
+        this.category = categoryDto.category;
       }
     })
   }
@@ -63,6 +64,7 @@ export class CategoryFormComponent implements OnInit {
       })).subscribe((response) => {
         console.log(response);
         this.successNotification();
+        this.router.navigate(['/category']);
       }, (error) => {
         console.log(error)
       })
@@ -72,6 +74,7 @@ export class CategoryFormComponent implements OnInit {
         response => {
           console.log(response);
           this.successNotification();
+          this.router.navigate(['/category']);
         },
         error => {
           console.log(error);

@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { CategoryComponent } from './category/category.component';
 import { MainComponent } from './main.component';
+import { ProductFormComponent } from './product/product-form/product-form.component';
+import { ProductComponent } from './product/product.component';
 import { TableFormComponent } from './table/table-form/table-form.component';
 import { TableComponent } from './table/table.component';
 
@@ -38,6 +40,18 @@ const routes: Routes = [
         {
           path: 'table-form',
           component: TableFormComponent
+        },
+        {
+          path: 'product',
+          component: ProductComponent
+        },
+        {
+          path: 'product-form/:id',
+          component: ProductFormComponent
+        },
+        {
+          path: 'product-form',
+          component: ProductFormComponent
         }
       ]
     },

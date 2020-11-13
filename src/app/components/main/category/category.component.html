@@ -14,11 +14,11 @@
                           <th class="border-0">Category Name</th>
                           <th class="border-0">Action</th>
                         </tr>
-                      </thead> 
+                      </thead>
                       <tbody>
                       <tr *ngFor="let category of categories">
-                        <td> {{ category.id }} </td>
-                        <td> {{ category.name }} </td>
+                        <td> {{ category.category.id }} </td>
+                        <td> {{ category.category.name }} </td>
                         <td><a href="#" class="btn btn-info m-1">View Details</a><a class="btn btn-success m-1" routerLink="/category-form/{{ category.id }}">Edit</a><a (click)="delete(category.id)" class="btn btn-danger m-1">Delete</a></td>
                       </tr>
                       </tbody>

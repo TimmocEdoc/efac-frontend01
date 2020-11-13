@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { $ } from 'protractor';
 import { Observable } from 'rxjs';
-import { Category } from 'src/types/model';
+import { Category, CategoryDto } from 'src/types/model';
 import { baseUrl } from './baseUrl';
 
 
@@ -17,8 +17,8 @@ export class CategoryApi {
         
     }
 
-    getCategories(): Observable<Category[]> {
-        return this.httpClient.get<Category[]>(this.hostUrl + "category/list")
+    getCategories(): Observable<CategoryDto[]> {
+        return this.httpClient.get<CategoryDto[]>(this.hostUrl + "category/list")
     }
 
     saveCategory(data): Observable<any> {
@@ -33,7 +33,7 @@ export class CategoryApi {
         return this.httpClient.put(`${this.hostUrl + "category/update"}/${id}`, data, {responseType: 'text'});
     }
 
-    getCategory(id): Observable<Category> {
-        return this.httpClient.get<Category>(`${this.hostUrl + "category/details"}/${id}`)
+    getCategory(id): Observable<CategoryDto> {
+        return this.httpClient.get<CategoryDto>(`${this.hostUrl + "category/details"}/${id}`)
     }
 }

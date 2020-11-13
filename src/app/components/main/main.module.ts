@@ -12,6 +12,7 @@ import { ProductComponent } from './product/product.component';
 import { TableComponent } from './table/table.component';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { TableFormComponent } from './table/table-form/table-form.component';
+import { ProductFormComponent } from './product/product-form/product-form.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TableFormComponent } from './table/table-form/table-form.component';
       TableComponent,
       ProductComponent,
       CategoryFormComponent,
-      TableFormComponent
+      TableFormComponent,
+      ProductFormComponent
     ],
     imports: [  
       ReactiveFormsModule,
