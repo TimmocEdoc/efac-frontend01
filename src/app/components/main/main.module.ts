@@ -13,6 +13,11 @@ import { TableComponent } from './table/table.component';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { TableFormComponent } from './table/table-form/table-form.component';
 import { ProductFormComponent } from './product/product-form/product-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { MatOptionModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -26,12 +31,15 @@ import { ProductFormComponent } from './product/product-form/product-form.compon
       TableFormComponent,
       ProductFormComponent
     ],
-    imports: [  
-      ReactiveFormsModule,
-      CommonModule,
-      MainRoutingModule,
+    imports: [
+      HttpClientModule,
       FormsModule,
-      HttpClientModule
+      CommonModule,
+      ReactiveFormsModule,
+      MatSelectModule,
+      MatOptionModule,
+      MatFormFieldModule,
+      MainRoutingModule
     ]
   })
   export class MainModule { }

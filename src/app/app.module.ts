@@ -10,18 +10,21 @@ import { IndexComponent } from './components/main/index/index.component';
 import { TableComponent } from './components/main/table/table.component';
 import { ProductComponent } from './components/main/product/product.component';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainRoutingModule } from './components/main/main-routing.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    CommonModule,
-    ReactiveFormsModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

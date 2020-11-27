@@ -44,7 +44,7 @@ export class CategoryFormComponent implements OnInit {
   successNotification(){
     Swal.fire({
       icon: "success",
-      title: "Table has been saved.",
+      title: "Category has been saved.",
       showConfirmButton: false,
       timer: 1000,
       position: "bottom-right"

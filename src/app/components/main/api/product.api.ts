@@ -27,7 +27,7 @@ export class ProductApi {
         return this.httpClient.delete(`${this.hostUrl + "product/delete"}/${id}`, {responseType: 'text'})
     }
 
-    updateproduct(id, data): Observable<any> {
+    updateProduct(id, data): Observable<any> {
         return this.httpClient.put(`${this.hostUrl + "product/update"}/${id}`, data, {responseType: 'text'});
     }
 
