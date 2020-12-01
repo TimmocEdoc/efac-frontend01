@@ -9,9 +9,10 @@
                     <label for="inputText3" class="col-form-label">Category</label>
                     <div class="input-group-append be-addon row">
                         <mat-form-field>
-                          <mat-label>Choose a category</mat-label>
+                          <!-- <mat-label>Choose a category</mat-label> -->
                           <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="selected">
-                            <mat-option *ngFor="let category of categories" [value]="category.category.id"> {{ category.category.name }} </mat-option>
+                            <mat-option [value]="selected" *ngIf="selected" style="display: none">{{ selected.name }}</mat-option>
+                            <mat-option *ngFor="let category of categories" [value]="category.category"> {{ category.category.name }} </mat-option>
                           </mat-select>
                         </mat-form-field>
                     </div>

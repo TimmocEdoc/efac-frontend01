@@ -21,7 +21,7 @@ export class ProductFormComponent implements OnInit {
   product: Product;
   form: FormGroup;
   private routeSub: String;
-  selected = 'None';
+  public selected: Category;
 
   constructor(private productApi: ProductApi, private categoryApi: CategoryApi, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
@@ -32,13 +32,18 @@ export class ProductFormComponent implements OnInit {
     })
     this.routeSub = this.route.snapshot.params.id;
     this.productApi.getProduct(this.routeSub).subscribe(productDto => {
+      console.log(productDto);
       this.categoryApi.getCategories().subscribe(categoryDtos => {
         console.log(categoryDtos);
         this.categories = categoryDtos;
       })
-      if (productDto) {
-        this.form.patchValue(productDto);
-        this.productDto = productDto;
+      if (productDto.product) {
+        this.form.patchValue(productDto.product);
+        let body = Object.assign({}, { id: productDto.category_id, name: productDto.category_name});
+        this.category = body;
+        this.selected = this.category;
+        console.log(this.selected);
+        this.product = productDto.product;
       }
     })
     
@@ -68,10 +73,10 @@ export class ProductFormComponent implements OnInit {
     }
     let body = this.form.value;
     console.log(this.product);
-    console.log(body)
+    console.log(body);
     if(this.product) {
       body = Object.assign({}, body, { id: this.product.id})
-      this.productApi.updateProduct(this.selected, body).pipe(tap(() => {
+      this.productApi.updateProduct(this.selected.id, body).pipe(tap(() => {
       })).subscribe((response) => {
         console.log(response);
         this.successNotification();
@@ -80,7 +85,7 @@ export class ProductFormComponent implements OnInit {
         console.log(error)
       })
     } else {
-      this.productApi.saveProduct(this.selected, body)
+      this.productApi.saveProduct(this.selected.id, body)
       .subscribe(
         response => {
           console.log(response);
